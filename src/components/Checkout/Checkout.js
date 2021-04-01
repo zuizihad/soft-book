@@ -11,11 +11,10 @@ const Checkout = () => {
     const { name, email } = loggedInUser;
     const { _id, bookName, bookAuthor, bookPrice, imageURL } = book;
 
-
     const handleCheckout = () => {
         const newCheckout = {
             userName: name,
-            userEmail: email,
+            email: email,
             bookID: _id,
             bookName: bookName,
             bookPrice: bookPrice,
@@ -24,7 +23,7 @@ const Checkout = () => {
             quantity: 1,
             orderDate: new Date()
         }
-        const url = `http://localhost:5000/checkout`;
+        const url = `https://banana-tart-33572.herokuapp.com/checkout`;
         fetch(url, {
             method: 'POST',
             headers: {
@@ -40,7 +39,7 @@ const Checkout = () => {
     };
     console.log(loggedInUser)
     useEffect(() => {
-        fetch('http://localhost:5000/book/' + id)
+        fetch('https://banana-tart-33572.herokuapp.com/book/' + id)
             .then(res => res.json())
             .then(data => {
                 setBook(data)
@@ -73,7 +72,6 @@ const Checkout = () => {
                     <button className="btn btn-primary" onClick={handleCheckout}>checkout</button>
                 </div>
             </div>
-
         </div>
     );
 };

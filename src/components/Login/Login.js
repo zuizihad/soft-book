@@ -4,11 +4,12 @@ import "firebase/auth";
 import firebaseConfig from '../../firebase.config';
 import { userContext } from '../../App';
 import { useHistory, useLocation } from 'react-router';
-
+import Header from '../Header/Header';
 
 if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
 }
+
 const Login = () => {
     const history = useHistory();
     const location = useLocation();
@@ -43,7 +44,12 @@ const Login = () => {
     }
     return (
         <div>
-            <div className="btn btn-primary" onClick={haqndleLogin}>continue with Google</div>
+            <Header></Header>
+            <div className="card m-auto">
+                <h4>Login to Purchase Book</h4>
+                <br />
+                <div className="btn btn-primary" onClick={haqndleLogin}>continue with Google</div>
+            </div>
         </div>
     );
 };

@@ -2,13 +2,10 @@ import React, { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import './App.css';
 import AddBook from './components/AddBook/AddBook';
-import Admin from "./components/Admin/Admin";
-import Header from "./components/Header/Header";
 import Home from './components/Home/Home';
 import Login from "./components/Login/Login";
 import ManageBook from "./components/ManageBook/ManageBook";
@@ -16,12 +13,10 @@ import NotFound from './components/NotFound/NotFound';
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Checkout from "./components/Checkout/Checkout";
 import Orders from "./components/Orders/Orders";
-
 export const userContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-
   return (
     <userContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
@@ -35,18 +30,18 @@ function App() {
           <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/admin/manageBook">
+          <PrivateRoute path="/admin/manageBook">
             <ManageBook></ManageBook>
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path="/admin/addBook">
             <AddBook></AddBook>
           </PrivateRoute>
-          <Route path="/checkout/:id">
+          <PrivateRoute path="/checkout/:id">
             <Checkout></Checkout>
-          </Route>
-          <Route path="/orders">
+          </PrivateRoute>
+          <PrivateRoute path="/orders">
             <Orders></Orders>
-          </Route>
+          </PrivateRoute>
           <Route path="*">
             <NotFound />
           </Route>

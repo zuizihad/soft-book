@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../Admin/Admin.css';
 import GetBook from "./GetBook";
 
 const ManageBook = () => {
-
     const [books, setBooks] = useState([]);
-
     useEffect(() => {
-        fetch('http://localhost:5000/books')
+        fetch('https://banana-tart-33572.herokuapp.com/books')
             .then(res => res.json())
             .then(data => {
                 setBooks(data)
@@ -60,7 +53,6 @@ const ManageBook = () => {
                 </div>
             </div>
 
-            {/* main */}
             <div className="main-content">
                 <main>
                     <section className="recent">
@@ -84,15 +76,12 @@ const ManageBook = () => {
                                         </tbody>
                                     </table>
                                 </div>
-
-
                             </div>
                         </div>
                     </section>
                 </main>
             </div>
         </div>
-
     );
 };
 

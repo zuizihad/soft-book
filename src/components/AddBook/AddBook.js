@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
     Link
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -11,7 +8,7 @@ import '../Admin/Admin.css'
 
 const AddBook = () => {
     const [imageURL, setImageURL] = useState(null)
-    const { register, handleSubmit, watch, errors } = useForm();
+    const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
         const bookData = {
             bookName: data.name,
@@ -19,7 +16,7 @@ const AddBook = () => {
             bookPrice: data.price,
             imageURL: imageURL
         };
-        const url = `http://localhost:5000/addBook`
+        const url = `https://banana-tart-33572.herokuapp.com/addBook`
         console.log(bookData)
         fetch(url, {
             method: 'POST',
@@ -45,7 +42,6 @@ const AddBook = () => {
             .catch(err => {
                 console.log(err)
             })
-
     }
     return (
         <div>
@@ -62,7 +58,7 @@ const AddBook = () => {
                     <ul>
                         <li>
                             <Link to="/admin/manageBook">
-                                <a href="">
+                                <a>
                                     <span className="ti-home"></span>
                                     <span>Manage Books</span>
                                 </a>
@@ -70,7 +66,7 @@ const AddBook = () => {
                         </li>
                         <li>
                             <Link to='/admin/addBook'>
-                                <a href="">
+                                <a>
                                     <span className="ti-face-smile"></span>
                                     <span>Add Book</span>
                                 </a>
@@ -78,7 +74,7 @@ const AddBook = () => {
                         </li>
                         <li>
                             <Link to='/admin/editBook'>
-                                <a href="">
+                                <a>
                                     <span className="ti-agenda"></span>
                                     <span>Edit Book</span>
                                 </a>
@@ -88,7 +84,6 @@ const AddBook = () => {
                 </div>
             </div>
 
-            {/* main */}
             <div className="main-content">
                 <main>
                     <section className="recent">
@@ -96,22 +91,21 @@ const AddBook = () => {
                             <div className="activity-card">
                                 <h3>Add Book</h3>
                                 <form onSubmit={handleSubmit(onSubmit)}>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text ti-agenda" id="basic-addon1"></span>
-
-                                        <input type="text" class="form-control" name="name" defaultValue="Complete fundamental javascript" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-                                        <span class="input-group-text ti-user" id="basic-addon1"></span>
-                                        <input type="text" class="form-control" name="author" defaultValue="Zihadul Islam" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text ti-agenda" id="basic-addon1"></span>
+                                        <input type="text" className="form-control" name="name" defaultValue="Complete fundamental javascript" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                                        <span className="input-group-text ti-user" id="basic-addon1"></span>
+                                        <input type="text" className="form-control" name="author" defaultValue="Zihadul Islam" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
                                     </div>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text ti-money" id="basic-addon1"></span>
-                                        <input type="text" class="form-control" name="price" defaultValue="350" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
-                                        <span class="input-group-text ti-image" id="basic-addon1"></span>
-                                        <input name="exampleRequired" type="file" onChange={handleImage} class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
+                                    <div className="input-group mb-3">
+                                        <span className="input-group-text ti-money" id="basic-addon1"></span>
+                                        <input type="text" className="form-control" name="price" defaultValue="350" ref={register} placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                                        <span className="input-group-text ti-image" id="basic-addon1"></span>
+                                        <input name="exampleRequired" type="file" onChange={handleImage} className="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" />
                                     </div>
                                     {errors.exampleRequired && <span>This field is required</span>}
                                     <br />
-                                    <input type="submit" class="btn btn-primary m-4" />
+                                    <input type="submit" className="btn btn-primary m-4" />
                                 </form>
                             </div>
                         </div>
