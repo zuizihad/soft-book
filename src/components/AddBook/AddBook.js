@@ -36,7 +36,6 @@ const AddBook = () => {
         imageData.append('image', event.target.files[0]);
         axios.post('https://api.imgbb.com/1/upload', imageData)
             .then(res => {
-                // console.log(res.data.data.display_url)
                 setImageURL(res?.data?.data?.display_url)
             })
             .catch(err => {
