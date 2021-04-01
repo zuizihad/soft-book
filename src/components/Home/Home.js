@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Book from '../Book/Book';
+import Header from '../Header/Header';
 import './Home.css'
 
 const Home = () => {
@@ -11,14 +12,14 @@ const Home = () => {
             .then(data => setBooks(data))
     }, [])
     return (
-
-        <div className="home">
-            {
-                books.map(book => <Book book={book}></Book>)
-            }
-        </div>
-
-
+        <>
+            <Header></Header>
+            <div className="home">
+                {
+                    books.map(book => <Book book={book}></Book>)
+                }
+            </div>
+        </>
     );
 };
 

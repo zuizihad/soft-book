@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     Link
 } from "react-router-dom";
-import AddBook from "../AddBook/AddBook";
-import ManageBook from '../ManageBook/ManageBook';
-import './Admin.css';
+import '../Admin/Admin.css';
+import GetBook from "./GetBook";
 
-const Admin = () => {
+const ManageBook = () => {
+
+    const [books, setBooks] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/books')
+            .then(res => res.json())
+            .then(data => {
+                setBooks(data)
+            })
+    }, [])
     return (
         <div>
             <input type="checkbox" name="" id="sidebar-toggle" value="" />
@@ -24,7 +33,7 @@ const Admin = () => {
                 <div className="sidebar-menu">
                     <ul>
                         <li>
-                            <Link to="/manageBook">
+                            <Link to="/admin/manageBook">
                                 <a href="">
                                     <span className="ti-home"></span>
                                     <span>Manage Books</span>
@@ -32,7 +41,7 @@ const Admin = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to='/addBook'>
+                            <Link to='/admin/addBook'>
                                 <a href="">
                                     <span className="ti-face-smile"></span>
                                     <span>Add Book</span>
@@ -40,7 +49,7 @@ const Admin = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to='/editBook'>
+                            <Link to='/admin/editBook'>
                                 <a href="">
                                     <span className="ti-agenda"></span>
                                     <span>Edit Book</span>
@@ -58,16 +67,24 @@ const Admin = () => {
                         <div className="activity-grid">
                             <div className="activity-card">
                                 <h3>Add Book</h3>
-                                <Router>
-                                    <Switch>
-                                        <Route path="/manageBook">
-                                            <ManageBook></ManageBook>
-                                        </Route>
-                                        <Route path="/addBook">
-                                            <AddBook></AddBook>
-                                        </Route>
-                                    </Switch>
-                                </Router>
+                                <div className="table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Book Name</th>
+                                                <th>Author Name</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                books.map(book => <GetBook id={book._id} book={book}></GetBook>)
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
 
                             </div>
                         </div>
@@ -75,7 +92,8 @@ const Admin = () => {
                 </main>
             </div>
         </div>
+
     );
 };
 
-export default Admin;
+export default ManageBook;
